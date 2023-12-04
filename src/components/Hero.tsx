@@ -1,8 +1,11 @@
+import bgHero from '../assets/bg-hero.svg';
 import heroImg from '../assets/hero-img.png';
 
 const Hero = () => {
   return (
-    <div className='md:flex justify-between items-end bg-[url("bg-hero.svg")] bg-[percentage:90%] bg-no-repeat bg-center mb-8 lg:border-b-[10px] border-primary'>
+    <div
+      style={{ backgroundImage: `url(${bgHero})` }}
+      className='md:flex justify-between items-end bg-[percentage:90%] bg-no-repeat bg-center mb-8 lg:border-b-[10px] border-primary'>
       <div className='flex flex-col items-center md:items-start py-16 md:pl-4'>
         <h1 className='text-4xl sm:text-5xl font-black text-center md:text-left text-[#2E2E2E]'>
           RIZKY
