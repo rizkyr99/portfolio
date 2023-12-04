@@ -4,7 +4,7 @@ import { ExternalLink, Github } from 'lucide-react';
 const ProjectItem = () => {
   return (
     <div className='grid sm:grid-cols-2 max-sm:shadow-[0_4px_24px_rgba(0,0,0,0.1)] gap-4 w-full max-sm:max-w-md mx-auto'>
-      <img src={project1} alt='' className='h-full w-full object-contain' />
+      <img src={project1} alt='' className='w-full object-contain' />
       <div className='p-4 max-sm:pt-2'>
         <h3 className='text-xl text-center sm:text-left md:text-2xl mb-4'>
           Inventory Management
