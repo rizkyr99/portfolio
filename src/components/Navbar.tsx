@@ -1,4 +1,4 @@
-import { AlignRight, Menu, X } from 'lucide-react';
+import { AlignRight, X } from 'lucide-react';
 import logo from '../assets/logo.svg';
 import { useEffect, useState } from 'react';
 
@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const scrolledNavbar = () => {
-    let windowHeight = window.scrollY;
+    const windowHeight = window.scrollY;
     windowHeight > 200 ? setIsScrolled(true) : setIsScrolled(false);
   };
 
