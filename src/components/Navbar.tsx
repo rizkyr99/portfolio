@@ -29,9 +29,7 @@ const Navbar = () => {
       <nav className='max-w-6xl mx-auto h-12 sm:h-20 bg-white flex items-center justify-between px-4'>
         <img src={logo} className='h-8' alt='' />
         <div className='flex items-center gap-x-12 max-sm:hidden'>
-          <a href='#about' className='font-bold'>
-            About
-          </a>
+          <a href='#about'>About</a>
           <a href='#works'>Works</a>
           <a href='#contact'>Contact</a>
         </div>
@@ -51,11 +49,6 @@ const Navbar = () => {
                 className='absolute top-4 right-4'>
                 <X />
               </button>
-              <a
-                href=''
-                className='relative font-bold after:block after:h-1 after:w-[calc(100%+8px)] after:absolute after:-left-1 after:bottom-[5px] after:-z-[1] after:bg-[#63A6F4]'>
-                Home
-              </a>
               <a
                 href='#about'
                 className='relative hover:font-bold after:invisible hover:after:visible after:block after:h-1 after:w-0 hover:after:w-[calc(100%+8px)] after:absolute after:-left-1 after:bottom-[5px] after:-z-[1] after:bg-[#63A6F4] after:transition-all'>
