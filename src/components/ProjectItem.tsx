@@ -1,5 +1,4 @@
 import React from 'react';
-import project1 from '../assets/project1.png';
 import { ExternalLink, Github } from 'lucide-react';
 
 interface ProjectItemProps {
