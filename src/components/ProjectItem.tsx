@@ -1,31 +1,57 @@
+import React from 'react';
 import project1 from '../assets/project1.png';
 import { ExternalLink, Github } from 'lucide-react';
 
-const ProjectItem = () => {
+interface ProjectItemProps {
+  title: string;
+  description: string;
+  image: string;
+  techs: string[];
+  link?: string;
+  github?: string;
+  rightImage?: boolean;
+}
+
+const ProjectItem: React.FC<ProjectItemProps> = ({
+  title,
+  description,
+  image,
+  techs,
+  link,
+  github,
+  rightImage,
+}) => {
   return (
-    <div className='grid sm:grid-cols-2 max-sm:shadow-[0_4px_24px_rgba(0,0,0,0.1)] gap-4 w-full max-sm:max-w-md mx-auto'>
-      <img src={project1} alt='' className='w-full object-contain' />
+    <div className='grid md:grid-cols-2 max-md:shadow-[0_4px_24px_rgba(0,0,0,0.1)] gap-4 w-full max-sm:max-w-md mx-auto'>
+      <img
+        src={image}
+        alt=''
+        className={`w-full object-contain ${rightImage && 'md:order-2'}`}
+      />
       <div className='p-4 max-sm:pt-2'>
         <h3 className='text-xl text-center sm:text-left md:text-2xl mb-4'>
-          Inventory Management
+          {title}
         </h3>
-        <p className='mb-2'>
-          Designed and implemented a user-friendly web application for efficient
-          inventory control. A project team is carried out by 4 people. Act as
-          frontend lead.
-        </p>
+        <p className='mb-2'>{description}</p>
         <div className='flex flex-wrap gap-2 mb-2'>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>react</div>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>tailwind</div>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>mongodb</div>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>nextjs</div>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>express</div>
-          <div className='bg-[#ececec] px-4 py-1 text-sm'>node</div>
+          {techs.map((tech) => (
+            <div className='bg-[#ececec] px-4 py-1 text-sm'>{tech}</div>
+          ))}
         </div>
-        <div className='flex gap-2'>
-          <ExternalLink className='cursor-pointer hover:opacity-50 transition' />
-          <Github className='cursor-pointer hover:opacity-50 transition' />
-        </div>
+        {(link || github) && (
+          <div className='flex gap-2'>
+            {link && (
+              <a href={link}>
+                <ExternalLink className='cursor-pointer hover:opacity-50 transition' />
+              </a>
+            )}
+            {github && (
+              <a href={github}>
+                <Github className='cursor-pointer hover:opacity-50 transition' />
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
