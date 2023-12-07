@@ -3,7 +3,9 @@ import aboutBg from '../assets/about-bg.svg';
 
 const About = () => {
   return (
-    <div className='flex flex-col items-center px-4 gap-y-4 lg:gap-y-8'>
+    <section
+      id='about'
+      className='flex flex-col items-center px-4 gap-y-4 lg:gap-y-8 scroll-m-20'>
       <SectionTitle label='About Me' />
       <div className='grid md:grid-cols-2 gap-5 items-center'>
         <img src={aboutBg} alt='' className='hidden md:block' />
@@ -16,7 +18,7 @@ const About = () => {
           next project!
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 
