@@ -23,5 +23,5 @@ export const gear: GearItem[] = [
   { name: 'Edifier MR4', note: 'nearfield studio monitors' },
 ];
 
-export const spotifyEmbed: string | null = null;
-// e.g. "https://open.spotify.com/embed/playlist/XXXXXXXX"
+export const spotifyEmbed: string | null =
+  'https://open.spotify.com/embed/artist/7FBcuc1gsnv6Y1nwFtNRCb?utm_source=generator&theme=0';
