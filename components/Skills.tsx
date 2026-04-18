@@ -1,21 +1,20 @@
-import { SectionHeader } from "./SectionHeader";
 import { FretMarker } from "./ui/FretMarker";
-import { skills } from "@/content/skills";
+import { fetchSkills } from "@/lib/queries";
 import { cn } from "@/lib/cn";
 
-export function Skills() {
+export async function Skills() {
+  const skills = await fetchSkills();
   return (
     <section
       id="skills"
       className="relative py-24 px-6 fretboard-bg text-cream overflow-hidden"
     >
-      {/* fret wire lines */}
       <div
         className="absolute inset-0 flex flex-col justify-evenly opacity-30 pointer-events-none"
         aria-hidden
       >
-        {Array.from({ length: 7 }).map((_, i) => (
-          <div key={i} className="h-px w-full bg-chrome/60" />
+        {["a","b","c","d","e","f","g"].map((k) => (
+          <div key={k} className="h-px w-full bg-chrome/60" />
         ))}
       </div>
 
@@ -36,7 +35,7 @@ export function Skills() {
         </div>
 
         <div className="space-y-10">
-          {skills.map((group) => (
+          {skills.map((group: { group: string; items: { name: string; level: number }[] }) => (
             <div key={group.group}>
               <div className="flex items-center gap-3 mb-4">
                 <FretMarker variant="double" size="sm" />
@@ -58,7 +57,7 @@ export function Skills() {
                     <span className="inline-flex gap-1" aria-label={`level ${s.level} of 5`}>
                       {Array.from({ length: 5 }).map((_, i) => (
                         <span
-                          key={i}
+                          key={`${s.name}-${i}`}
                           className={cn(
                             "w-1.5 h-1.5 rounded-full transition-colors",
                             i < s.level ? "bg-butterscotch" : "bg-cream/20"

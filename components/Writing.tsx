@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
-import { getAllPosts } from "@/lib/mdx";
+import { fetchPosts } from "@/lib/queries";
 
-export function Writing() {
-  const posts = getAllPosts().slice(0, 3);
+export async function Writing() {
+  const posts = (await fetchPosts()).slice(0, 3);
 
   return (
     <section id="writing" className="relative py-24 px-6 bg-cream">
@@ -13,11 +13,11 @@ export function Writing() {
 
         {posts.length === 0 ? (
           <p className="text-rosewood/60 font-mono text-sm">
-            // no posts yet — add an .mdx file under content/posts/
+            no posts yet — add one in Sanity Studio.
           </p>
         ) : (
           <ul className="divide-y divide-rosewood/10">
-            {posts.map((p) => (
+            {posts.map((p: { slug: string; title: string; summary: string; date: string }) => (
               <li key={p.slug}>
                 <Link
                   href={`/blog/${p.slug}`}

@@ -1,8 +1,9 @@
 import { SectionHeader } from "./SectionHeader";
 import { FretMarker } from "./ui/FretMarker";
-import { experience } from "@/content/experience";
+import { fetchExperience } from "@/lib/queries";
 
-export function Experience() {
+export async function Experience() {
+  const experience = await fetchExperience();
   return (
     <section
       id="experience"
@@ -12,7 +13,7 @@ export function Experience() {
         <SectionHeader eyebrow="Experience" title="The setlist." fret="IX" />
 
         <ol className="relative border-l border-rosewood/20 ml-3 space-y-10 pl-8">
-          {experience.map((e, i) => {
+          {experience.map((e: { company: string; role: string; period: string; location?: string; bullets: string[] }, i: number) => {
             const isEmphasis = i % 2 === 1;
             return (
               <li key={`${e.company}-${e.period}`} className="relative">
@@ -40,9 +41,9 @@ export function Experience() {
                 </p>
 
                 <ul className="mt-4 space-y-2">
-                  {e.bullets.map((b, j) => (
+                  {e.bullets.map((b) => (
                     <li
-                      key={j}
+                      key={b}
                       className="text-rosewood/80 text-[15px] leading-relaxed flex gap-3"
                     >
                       <span

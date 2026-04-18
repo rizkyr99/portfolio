@@ -5,26 +5,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { PickupSwitch } from "./ui/PickupSwitch";
-import { projects, type ProjectCategory } from "@/content/projects";
 
-type Filter = "all" | ProjectCategory;
+type ProjectCategory = "frontend" | "fullstack" | "backend";
+
+type Project = {
+  title: string;
+  blurb: string;
+  category: ProjectCategory;
+  tags: string[];
+  image?: string;
+  repoUrl?: string;
+  liveUrl?: string;
+  year: number;
+};
 
 const options: [
-  { value: Filter; label: string },
-  { value: Filter; label: string },
-  { value: Filter; label: string }
+  { value: ProjectCategory; label: string },
+  { value: ProjectCategory; label: string },
+  { value: ProjectCategory; label: string }
 ] = [
   { value: "frontend", label: "Frontend" },
   { value: "fullstack", label: "Fullstack" },
   { value: "backend", label: "Backend" },
 ];
 
-export function Projects() {
-  const [filter, setFilter] = useState<Filter>("fullstack");
+export function Projects({ projects }: { readonly projects: Project[] }) {
+  const [filter, setFilter] = useState<ProjectCategory>("fullstack");
 
   const filtered = useMemo(
     () => projects.filter((p) => p.category === filter),
-    [filter]
+    [projects, filter]
   );
 
   return (
@@ -38,9 +48,9 @@ export function Projects() {
             className="mb-0"
           />
           <PickupSwitch
-            options={options as [typeof options[0], typeof options[1], typeof options[2]]}
+            options={options}
             value={filter}
-            onChange={(v) => setFilter(v as Filter)}
+            onChange={(v) => setFilter(v as ProjectCategory)}
           />
         </div>
 

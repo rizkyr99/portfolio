@@ -1,8 +1,13 @@
 import { SectionHeader } from './SectionHeader';
-import { rotation, gear, spotifyEmbed } from '@/content/music';
+import { fetchMusic } from '@/lib/queries';
 import { FretMarker } from './ui/FretMarker';
 
-export function Music() {
+
+export async function Music() {
+  const music = await fetchMusic();
+  const rotation = music?.rotation ?? [];
+  const gear = music?.gear ?? [];
+  const spotifyEmbed = music?.spotifyEmbedUrl ?? null;
   return (
     <section
       id='music'
@@ -24,7 +29,7 @@ export function Music() {
               </h3>
             </div>
             <ul className='space-y-3'>
-              {rotation.map((r) => (
+              {rotation.map((r: { artist: string; album: string; year: number }) => (
                 <li
                   key={`${r.artist}-${r.album}`}
                   className='flex items-baseline gap-3 text-rosewood'>
@@ -49,7 +54,7 @@ export function Music() {
               </h3>
             </div>
             <ul className='space-y-3'>
-              {gear.map((g) => (
+              {gear.map((g: { name: string; note?: string }) => (
                 <li key={g.name} className='text-rosewood'>
                   <span className='font-display text-lg'>{g.name}</span>
                   {g.note && (

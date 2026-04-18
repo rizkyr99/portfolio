@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { getAllPosts } from "@/lib/mdx";
+import { fetchPosts } from "@/lib/queries";
 import { StringDivider } from "@/components/ui/StringDivider";
 
 export const metadata = {
   title: "Writing",
 };
 
-export default function BlogIndex() {
-  const posts = getAllPosts();
+export default async function BlogIndex() {
+  const posts = await fetchPosts();
 
   return (
     <main className="min-h-screen bg-cream px-6 py-24">
@@ -31,11 +31,11 @@ export default function BlogIndex() {
 
         {posts.length === 0 ? (
           <p className="text-rosewood/60 font-mono text-sm">
-            // no posts yet — add an .mdx file under content/posts/
+            // no posts yet — add one in Sanity Studio.
           </p>
         ) : (
           <ul className="divide-y divide-rosewood/10">
-            {posts.map((p) => (
+            {posts.map((p: { slug: string; title: string; summary: string; date: string }) => (
               <li key={p.slug}>
                 <Link
                   href={`/blog/${p.slug}`}

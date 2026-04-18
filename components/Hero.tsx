@@ -2,10 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Mail } from 'lucide-react';
-import { profile } from '@/content/profile';
 import { StringDivider } from './ui/StringDivider';
 
-export function Hero() {
+type Profile = { name: string; title: string; tagline: string; location: string } | null
+
+export function Hero({ profile }: { readonly profile: Profile }) {
+  if (!profile) return null;
   return (
     <section
       id='home'

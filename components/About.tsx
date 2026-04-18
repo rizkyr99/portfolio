@@ -1,10 +1,11 @@
 import { SectionHeader } from "./SectionHeader";
 import { StringDivider } from "./ui/StringDivider";
 import { FretMarker } from "./ui/FretMarker";
-import { influences } from "@/content/influences";
-import { profile } from "@/content/profile";
+import { fetchInfluences, fetchProfile } from "@/lib/queries";
 
-export function About() {
+export async function About() {
+  const [influences, profile] = await Promise.all([fetchInfluences(), fetchProfile()]);
+  if (!profile) return null;
   return (
     <section
       id="about"
@@ -44,7 +45,7 @@ export function About() {
               </h3>
             </div>
             <ul className="space-y-3">
-              {influences.map((inf) => (
+              {influences.map((inf: { name: string; kind: string; why?: string }) => (
                 <li
                   key={inf.name}
                   className="flex items-baseline gap-3 text-rosewood"
