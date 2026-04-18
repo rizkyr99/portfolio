@@ -1,5 +1,6 @@
 import { SectionHeader } from "./SectionHeader";
 import { FretMarker } from "./ui/FretMarker";
+import { Reveal } from "./ui/Reveal";
 import { fetchExperience } from "@/lib/queries";
 
 export async function Experience() {
@@ -9,7 +10,7 @@ export async function Experience() {
       id="experience"
       className="relative py-24 px-6 bg-gradient-to-b from-cream to-[#ede3d2]"
     >
-      <div className="mx-auto max-w-4xl">
+      <Reveal className="mx-auto max-w-4xl">
         <SectionHeader eyebrow="Experience" title="The setlist." fret="IX" />
 
         <ol className="relative border-l border-rosewood/20 ml-3 space-y-10 pl-8">
@@ -58,7 +59,7 @@ export async function Experience() {
             );
           })}
         </ol>
-      </div>
+      </Reveal>
     </section>
   );
 }

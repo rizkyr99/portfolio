@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
+import { Reveal } from "./ui/Reveal";
 import { fetchPosts } from "@/lib/queries";
 
 export async function Writing() {
@@ -8,7 +9,7 @@ export async function Writing() {
 
   return (
     <section id="writing" className="relative py-24 px-6 bg-cream">
-      <div className="mx-auto max-w-4xl">
+      <Reveal className="mx-auto max-w-4xl">
         <SectionHeader eyebrow="Writing" title="Notes & essays." fret="XII" />
 
         {posts.length === 0 ? (
@@ -49,7 +50,7 @@ export async function Writing() {
             All posts <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

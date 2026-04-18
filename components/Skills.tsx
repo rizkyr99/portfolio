@@ -1,4 +1,5 @@
 import { FretMarker } from "./ui/FretMarker";
+import { Reveal } from "./ui/Reveal";
 import { fetchSkills } from "@/lib/queries";
 import { cn } from "@/lib/cn";
 
@@ -18,7 +19,7 @@ export async function Skills() {
         ))}
       </div>
 
-      <div className="relative mx-auto max-w-5xl">
+      <Reveal className="relative mx-auto max-w-5xl">
         <div className="mb-10">
           <div className="flex items-center gap-3 text-cream/60">
             <FretMarker size="sm" />
@@ -72,7 +73,7 @@ export async function Skills() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { SectionHeader } from './SectionHeader';
 import { fetchMusic } from '@/lib/queries';
 import { FretMarker } from './ui/FretMarker';
+import { Reveal } from './ui/Reveal';
 
 
 export async function Music() {
@@ -17,7 +18,7 @@ export async function Music() {
         aria-hidden
       />
 
-      <div className='relative mx-auto max-w-5xl'>
+      <Reveal className='relative mx-auto max-w-5xl'>
         <SectionHeader eyebrow='Music' title="What's spinning." />
 
         <div className='grid md:grid-cols-2 gap-12'>
@@ -80,7 +81,7 @@ export async function Music() {
             />
           </div>
         )}
-      </div>
+      </Reveal>
     </section>
   );
 }

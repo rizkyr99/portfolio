@@ -1,6 +1,7 @@
 import { SectionHeader } from "./SectionHeader";
 import { StringDivider } from "./ui/StringDivider";
 import { FretMarker } from "./ui/FretMarker";
+import { Reveal } from "./ui/Reveal";
 import { fetchInfluences, fetchProfile } from "@/lib/queries";
 
 export async function About() {
@@ -15,7 +16,7 @@ export async function About() {
         className="absolute inset-0 bg-wood-grain opacity-[0.04] pointer-events-none"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-5xl">
+      <Reveal className="relative mx-auto max-w-5xl">
         <SectionHeader eyebrow="About" title="The short version." fret="III" />
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
@@ -72,7 +73,7 @@ export async function About() {
         </div>
 
         <StringDivider className="mt-16 opacity-50" />
-      </div>
+      </Reveal>
     </section>
   );
 }

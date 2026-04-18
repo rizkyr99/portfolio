@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Send } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
+import { Reveal } from "./ui/Reveal";
 import { profile } from "@/content/profile";
 
 export function Contact() {
@@ -22,7 +23,7 @@ export function Contact() {
       className="relative py-24 px-6 bg-rosewood text-cream overflow-hidden"
     >
       <div className="absolute inset-0 sunburst-bg opacity-20" aria-hidden />
-      <div className="relative mx-auto max-w-3xl">
+      <Reveal className="relative mx-auto max-w-3xl">
         <div className="mb-10">
           <div className="flex items-center gap-3 text-cream/60">
             <span
@@ -104,7 +105,7 @@ export function Contact() {
             </a>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

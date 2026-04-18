@@ -39,7 +39,13 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
 
   return (
     <section id="projects" className="relative py-24 px-6 bg-cream">
-      <div className="mx-auto max-w-6xl">
+      <motion.div
+        className="mx-auto max-w-6xl"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-15%' }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <SectionHeader
             eyebrow="Projects"
@@ -124,7 +130,7 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
             nothing in this position — try another pickup.
           </p>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }
