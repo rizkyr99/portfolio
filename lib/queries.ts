@@ -17,9 +17,16 @@ export type SanityProfile = {
   socials: { label: string; href: string }[];
 } | null
 
+type PortableTextBlock = import('@portabletext/react').PortableTextProps['value']
+
 export type SanityProject = {
   title: string; blurb: string; category: "frontend" | "fullstack" | "backend"; tags: string[];
   image?: string; repoUrl?: string; liveUrl?: string; year: number;
+  context?: PortableTextBlock;
+  features?: string[];
+  stackDetail?: { tool: string; why: string }[];
+  approach?: PortableTextBlock;
+  outcome?: PortableTextBlock;
 }
 
 export type SanityExperience = {
@@ -53,6 +60,20 @@ export function fetchProjects() {
       "image": image.asset->url
     }`,
     [],
+  )
+}
+
+export function fetchProjectByTitle(title: string) {
+  return safeFetch<SanityProject | null>(
+    `*[_type == "project" && title == $title][0] {
+      title, blurb, category, tags, year, repoUrl, liveUrl,
+      "image": image.asset->url,
+      context, features,
+      stackDetail[]{ tool, why },
+      approach, outcome
+    }`,
+    null,
+    { title },
   )
 }
 

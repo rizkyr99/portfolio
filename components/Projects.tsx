@@ -1,10 +1,19 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GitBranch } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { PickupSwitch } from "./ui/PickupSwitch";
+
+function slugify(title: string) {
+  return title
+    .toLowerCase()
+    .replaceAll("&", "and")
+    .replaceAll(/[^a-z0-9]+/g, "-")
+    .replaceAll(/(^-|-$)/g, "");
+}
 
 type ProjectCategory = "frontend" | "fullstack" | "backend";
 
@@ -99,6 +108,12 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
                 </ul>
 
                 <div className="mt-5 flex items-center gap-4 text-rosewood/70">
+                  <Link
+                    href={`/projects/${slugify(p.title)}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest hover:text-sunburst-amber transition-colors"
+                  >
+                    Case Study <ExternalLink className="w-3 h-3" />
+                  </Link>
                   {p.liveUrl && (
                     <a
                       href={p.liveUrl}
@@ -116,7 +131,7 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest hover:text-sunburst-amber transition-colors"
                     >
-                      Code <Github className="w-3 h-3" />
+                      Code <GitBranch className="w-3 h-3" />
                     </a>
                   )}
                 </div>
