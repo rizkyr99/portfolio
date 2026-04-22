@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { projects } from "@/content/projects";
-import { fetchProjectByTitle } from "@/lib/queries";
+import { fetchProjectByTitle, fetchProjects } from "@/lib/queries";
 
 function slugify(title: string) {
   return title
@@ -17,8 +16,9 @@ function slugify(title: string) {
 const proseClass =
   "text-rosewood/80 text-[16px] leading-[1.75] space-y-4 [&>h2]:font-display [&>h2]:text-xl [&>h2]:text-rosewood [&>h2]:mt-7 [&>h2]:mb-1 [&>h3]:font-display [&>h3]:text-lg [&>h3]:text-rosewood [&>h3]:mt-5 [&>h3]:mb-1 [&>a]:text-sunburst-amber [&>a]:underline [&>a]:underline-offset-4 [&>code]:font-mono [&>code]:text-[0.85em] [&>code]:bg-rosewood/5 [&>code]:px-1.5 [&>code]:py-0.5 [&>code]:rounded [&_pre]:bg-rosewood [&_pre]:text-cream [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:overflow-x-auto [&_pre]:text-sm [&_pre]:font-mono [&>blockquote]:border-l-2 [&>blockquote]:border-rosewood/20 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-rosewood/60 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:space-y-1";
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: slugify(p.title) }));
+export async function generateStaticParams() {
+  const sanityProjects = await fetchProjects();
+  return sanityProjects.map((p) => ({ slug: slugify(p.title) }));
 }
 
 export async function generateMetadata({
@@ -27,7 +27,8 @@ export async function generateMetadata({
   params: Promise<{ readonly slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((p) => slugify(p.title) === slug);
+  const sanityProjects = await fetchProjects();
+  const project = sanityProjects.find((p) => slugify(p.title) === slug);
   if (!project) return {};
   return {
     title: `${project.title} — Case Study`,
@@ -41,10 +42,11 @@ export default async function ProjectCaseStudy({
   readonly params: Promise<{ readonly slug: string }>;
 }) {
   const { slug } = await params;
-  const localProject = projects.find((p) => slugify(p.title) === slug);
-  if (!localProject) notFound();
+  const sanityProjects = await fetchProjects();
+  const projectPreview = sanityProjects.find((p) => slugify(p.title) === slug);
+  if (!projectPreview) notFound();
 
-  const project = (await fetchProjectByTitle(localProject.title)) ?? localProject;
+  const project = (await fetchProjectByTitle(projectPreview.title)) ?? projectPreview;
 
   const hasContent =
     project.context || project.features || project.approach || project.outcome;
