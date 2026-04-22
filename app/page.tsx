@@ -4,6 +4,7 @@ import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
+import { Certifications } from "@/components/Certifications";
 import { Writing } from "@/components/Writing";
 import { Music } from "@/components/Music";
 import { Contact } from "@/components/Contact";
@@ -22,6 +23,7 @@ export default async function Home() {
         <Skills />
         <Projects projects={projects ?? []} />
         <Experience />
+        <Certifications />
         <Writing />
         <Music />
         <Contact />

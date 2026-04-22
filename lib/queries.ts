@@ -45,6 +45,10 @@ export type SanityMusic = {
   spotifyEmbedUrl?: string;
 } | null
 
+export type SanityCertification = {
+  name: string; issuer: string; year: number; credentialUrl?: string;
+}
+
 export type SanityPostMeta = { slug: string; title: string; date: string; summary: string }
 
 export type SanityPost = SanityPostMeta & { content: import('@portabletext/react').PortableTextProps['value'] } | null
@@ -96,6 +100,15 @@ export function fetchSkills() {
 
 export function fetchInfluences() {
   return safeFetch<SanityInfluence[]>(`*[_type == "influences"][0].items`, [])
+}
+
+export function fetchCertifications() {
+  return safeFetch<SanityCertification[]>(
+    `*[_type == "certification"] | order(order asc) {
+      name, issuer, year, credentialUrl
+    }`,
+    [],
+  )
 }
 
 export function fetchPosts() {

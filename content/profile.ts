@@ -5,7 +5,7 @@ export const profile = {
     'Building thoughtful software the way a luthier builds a guitar — with attention to tone, feel, and craft.',
   location: 'Palembang, Indonesia',
   email: 'ramarizdev@gmail.com',
-  siteUrl: 'https://ramarizdev.com',
+  siteUrl: 'https://www.ramarizdev.my.id/',
   resumeUrl: '/resume.pdf',
   socials: [
     { label: 'GitHub', href: 'https://github.com/rizkyr99' },

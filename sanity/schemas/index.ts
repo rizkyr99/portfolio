@@ -5,6 +5,7 @@ import { musicSchema } from './music'
 import { skillsSchema } from './skills'
 import { influencesSchema } from './influences'
 import { postSchema } from './post'
+import { certificationSchema } from './certification'
 
 export const schemaTypes = [
   profileSchema,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   skillsSchema,
   influencesSchema,
   postSchema,
+  certificationSchema,
 ]
