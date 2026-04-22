@@ -49,9 +49,9 @@ export type SanityCertification = {
   name: string; issuer: string; year: number; credentialUrl?: string;
 }
 
-export type SanityPostMeta = { slug: string; title: string; date: string; summary: string }
+export type SanityPostMeta = { slug: string; title: string; date: string; summary: string; readingTime: number }
 
-export type SanityPost = SanityPostMeta & { content: import('@portabletext/react').PortableTextProps['value'] } | null
+export type SanityPost = SanityPostMeta & { content: import('@portabletext/react').PortableTextProps['value']; readingTime: number } | null
 
 export function fetchProfile() {
   return safeFetch<SanityProfile>(`*[_type == "profile"][0]`, null)
@@ -114,7 +114,8 @@ export function fetchCertifications() {
 export function fetchPosts() {
   return safeFetch<SanityPostMeta[]>(
     `*[_type == "post"] | order(date desc) {
-      title, "slug": slug.current, date, summary
+      title, "slug": slug.current, date, summary,
+      "readingTime": round(length(pt::text(content)) / 5 / 200)
     }`,
     [],
   )
@@ -123,7 +124,8 @@ export function fetchPosts() {
 export function fetchPost(slug: string) {
   return safeFetch<SanityPost>(
     `*[_type == "post" && slug.current == $slug][0] {
-      title, "slug": slug.current, date, summary, content
+      title, "slug": slug.current, date, summary, content,
+      "readingTime": round(length(pt::text(content)) / 5 / 200)
     }`,
     null,
     { slug },

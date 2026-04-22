@@ -18,7 +18,7 @@ export async function Writing() {
           </p>
         ) : (
           <ul className="divide-y divide-rosewood/10 dark:divide-cream/10">
-            {posts.map((p: { slug: string; title: string; summary: string; date: string }) => (
+            {posts.map((p) => (
               <li key={p.slug}>
                 <Link
                   href={`/blog/${p.slug}`}
@@ -31,8 +31,14 @@ export async function Writing() {
                     <p className="mt-1 text-rosewood/70 dark:text-cream/70 text-[15px] leading-relaxed">
                       {p.summary}
                     </p>
-                    <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-rosewood/50 dark:text-cream/50">
-                      {p.date}
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-rosewood/50 dark:text-cream/50 flex items-center gap-3">
+                      <span>{p.date}</span>
+                      {p.readingTime > 0 && (
+                        <>
+                          <span aria-hidden>·</span>
+                          <span>{p.readingTime} min read</span>
+                        </>
+                      )}
                     </p>
                   </div>
                   <ArrowUpRight className="w-5 h-5 mt-1.5 text-rosewood/40 dark:text-cream/40 group-hover:text-sunburst-amber group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all flex-shrink-0" />

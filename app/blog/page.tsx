@@ -35,7 +35,7 @@ export default async function BlogIndex() {
           </p>
         ) : (
           <ul className="divide-y divide-rosewood/10">
-            {posts.map((p: { slug: string; title: string; summary: string; date: string }) => (
+            {posts.map((p) => (
               <li key={p.slug}>
                 <Link
                   href={`/blog/${p.slug}`}
@@ -48,8 +48,14 @@ export default async function BlogIndex() {
                     <p className="mt-1 text-rosewood/70 text-[15px] leading-relaxed">
                       {p.summary}
                     </p>
-                    <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-rosewood/50">
-                      {p.date}
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-rosewood/50 flex items-center gap-3">
+                      <span>{p.date}</span>
+                      {p.readingTime > 0 && (
+                        <>
+                          <span aria-hidden>·</span>
+                          <span>{p.readingTime} min read</span>
+                        </>
+                      )}
                     </p>
                   </div>
                   <ArrowUpRight className="w-5 h-5 mt-1.5 text-rosewood/40 group-hover:text-sunburst-amber transition-colors flex-shrink-0" />

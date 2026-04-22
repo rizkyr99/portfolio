@@ -46,8 +46,14 @@ export default async function PostPage({
         <h1 className="mt-6 font-display text-4xl sm:text-5xl text-rosewood font-light tracking-tight leading-tight">
           {post.title}
         </h1>
-        <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-rosewood/50">
-          {post.date}
+        <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-rosewood/50 flex items-center gap-3">
+          <span>{post.date}</span>
+          {post.readingTime > 0 && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{post.readingTime} min read</span>
+            </>
+          )}
         </p>
 
         <StringDivider className="my-10 opacity-50" />
