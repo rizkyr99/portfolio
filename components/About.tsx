@@ -10,7 +10,7 @@ export async function About() {
   return (
     <section
       id="about"
-      className="relative py-24 px-6 bg-cream overflow-hidden"
+      className="relative py-24 px-6 bg-cream dark:bg-[#140A04] overflow-hidden"
     >
       <div
         className="absolute inset-0 bg-wood-grain opacity-[0.04] pointer-events-none"
@@ -20,7 +20,7 @@ export async function About() {
         <SectionHeader eyebrow="About" title="The short version." fret="III" />
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-          <div className="space-y-4 text-rosewood/85 text-[17px] leading-relaxed">
+          <div className="space-y-4 text-rosewood/85 dark:text-cream/85 text-[17px] leading-relaxed">
             <p>
               I&apos;m {profile.name}, a {profile.title.toLowerCase()} based in{" "}
               {profile.location}. I care about building software that feels
@@ -41,7 +41,7 @@ export async function About() {
           <div>
             <div className="flex items-center gap-2 mb-5">
               <FretMarker variant="double" size="sm" />
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70">
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70 dark:text-cream/70">
                 Influences
               </h3>
             </div>
@@ -49,7 +49,7 @@ export async function About() {
               {influences.map((inf: { name: string; kind: string; why?: string }) => (
                 <li
                   key={inf.name}
-                  className="flex items-baseline gap-3 text-rosewood"
+                  className="flex items-baseline gap-3 text-rosewood dark:text-cream"
                 >
                   <span
                     className="inline-block w-1.5 h-1.5 rounded-full bg-butterscotch flex-shrink-0 translate-y-[2px]"
@@ -58,11 +58,11 @@ export async function About() {
                   <span className="font-display italic text-lg">
                     {inf.name}
                   </span>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-rosewood/50">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-rosewood/50 dark:text-cream/50">
                     {inf.kind}
                   </span>
                   {inf.why && (
-                    <span className="text-rosewood/70 text-sm">
+                    <span className="text-rosewood/70 dark:text-cream/70 text-sm">
                       — {inf.why}
                     </span>
                   )}

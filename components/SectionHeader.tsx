@@ -8,10 +8,10 @@ type Props = {
   className?: string;
 };
 
-export function SectionHeader({ eyebrow, title, fret, className }: Props) {
+export function SectionHeader({ eyebrow, title, fret, className }: Readonly<Props>) {
   return (
     <div className={cn("flex flex-col gap-3 mb-10", className)}>
-      <div className="flex items-center gap-3 text-rosewood/60">
+      <div className="flex items-center gap-3 text-rosewood/60 dark:text-cream/60">
         <FretMarker size="sm" variant="single" />
         <span className="font-mono text-[11px] uppercase tracking-[0.25em]">
           {eyebrow}
@@ -22,7 +22,7 @@ export function SectionHeader({ eyebrow, title, fret, className }: Props) {
           </span>
         )}
       </div>
-      <h2 className="font-display text-4xl sm:text-5xl text-rosewood font-light tracking-tight">
+      <h2 className="font-display text-4xl sm:text-5xl text-rosewood dark:text-cream font-light tracking-tight">
         {title}
       </h2>
     </div>

@@ -12,7 +12,7 @@ export async function Music() {
   return (
     <section
       id='music'
-      className='relative py-24 px-6 bg-[#f0e4d1] overflow-hidden'>
+      className='relative py-24 px-6 bg-[#f0e4d1] dark:bg-[#0f0603] overflow-hidden'>
       <div
         className='absolute inset-0 bg-wood-grain opacity-[0.06] pointer-events-none'
         aria-hidden
@@ -25,7 +25,7 @@ export async function Music() {
           <div>
             <div className='flex items-center gap-2 mb-5'>
               <FretMarker variant='double' size='sm' />
-              <h3 className='font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70'>
+              <h3 className='font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70 dark:text-cream/70'>
                 In rotation
               </h3>
             </div>
@@ -33,13 +33,13 @@ export async function Music() {
               {rotation.map((r: { artist: string; album: string; year: number }) => (
                 <li
                   key={`${r.artist}-${r.album}`}
-                  className='flex items-baseline gap-3 text-rosewood'>
+                  className='flex items-baseline gap-3 text-rosewood dark:text-cream'>
                   <span className='font-display italic text-lg'>
                     {r.artist}
                   </span>
-                  <span className='text-rosewood/40'>·</span>
-                  <span className='text-rosewood/80'>{r.album}</span>
-                  <span className='ml-auto font-mono text-[10px] text-rosewood/50'>
+                  <span className='text-rosewood/40 dark:text-cream/40'>·</span>
+                  <span className='text-rosewood/80 dark:text-cream/80'>{r.album}</span>
+                  <span className='ml-auto font-mono text-[10px] text-rosewood/50 dark:text-cream/50'>
                     {r.year}
                   </span>
                 </li>
@@ -50,16 +50,16 @@ export async function Music() {
           <div>
             <div className='flex items-center gap-2 mb-5'>
               <FretMarker variant='double' size='sm' />
-              <h3 className='font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70'>
+              <h3 className='font-mono text-[11px] uppercase tracking-[0.25em] text-rosewood/70 dark:text-cream/70'>
                 Gear
               </h3>
             </div>
             <ul className='space-y-3'>
               {gear.map((g: { name: string; note?: string }) => (
-                <li key={g.name} className='text-rosewood'>
+                <li key={g.name} className='text-rosewood dark:text-cream'>
                   <span className='font-display text-lg'>{g.name}</span>
                   {g.note && (
-                    <span className='text-rosewood/60 text-sm ml-2 italic'>
+                    <span className='text-rosewood/60 dark:text-cream/60 text-sm ml-2 italic'>
                       — {g.note}
                     </span>
                   )}

@@ -12,7 +12,7 @@ type Props = {
   className?: string;
 };
 
-export function PickupSwitch({ options, value, onChange, className }: Props) {
+export function PickupSwitch({ options, value, onChange, className }: Readonly<Props>) {
   const activeIndex = Math.max(
     0,
     options.findIndex((o) => o.value === value)
@@ -20,7 +20,7 @@ export function PickupSwitch({ options, value, onChange, className }: Props) {
 
   return (
     <div className={cn("inline-flex flex-col items-center gap-3", className)}>
-      <div className="relative flex items-center justify-between w-48 h-10 px-2 rounded-full bg-gradient-to-b from-zinc-200 to-zinc-400 shadow-chrome chrome-edge">
+      <div className="relative flex items-center justify-between w-48 h-10 px-2 rounded-full bg-gradient-to-b from-zinc-200 to-zinc-400 dark:from-zinc-700 dark:to-zinc-900 shadow-chrome chrome-edge">
         <motion.div
           className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-cream to-chrome shadow-md"
           animate={{ left: `${8 + activeIndex * 72}px` }}
@@ -37,13 +37,13 @@ export function PickupSwitch({ options, value, onChange, className }: Props) {
           />
         ))}
       </div>
-      <div className="flex gap-3 text-[10px] uppercase tracking-widest text-rosewood/70 font-mono">
+      <div className="flex gap-3 text-[10px] uppercase tracking-widest text-rosewood/70 dark:text-cream/70 font-mono">
         {options.map((opt) => (
           <span
             key={opt.value}
             className={cn(
               "transition-colors",
-              opt.value === value ? "text-rosewood font-semibold" : ""
+              opt.value === value ? "text-rosewood dark:text-cream font-semibold" : ""
             )}
           >
             {opt.label}

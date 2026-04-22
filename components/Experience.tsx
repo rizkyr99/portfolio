@@ -8,12 +8,12 @@ export async function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-24 px-6 bg-gradient-to-b from-cream to-[#ede3d2]"
+      className="relative py-24 px-6 bg-gradient-to-b from-cream to-[#ede3d2] dark:from-[#140A04] dark:to-[#0f0603]"
     >
       <Reveal className="mx-auto max-w-4xl">
         <SectionHeader eyebrow="Experience" title="The setlist." fret="IX" />
 
-        <ol className="relative border-l border-rosewood/20 ml-3 space-y-10 pl-8">
+        <ol className="relative border-l border-rosewood/20 dark:border-cream/20 ml-3 space-y-10 pl-8">
           {experience.map((e: { company: string; role: string; period: string; location?: string; bullets: string[] }, i: number) => {
             const isEmphasis = i % 2 === 1;
             return (
@@ -29,14 +29,14 @@ export async function Experience() {
                 </span>
 
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <h3 className="font-display text-xl text-rosewood">
+                  <h3 className="font-display text-xl text-rosewood dark:text-cream">
                     {e.role}
                   </h3>
                   <span className="font-display italic text-butterscotch">
                     @ {e.company}
                   </span>
                 </div>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-rosewood/60">
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-rosewood/60 dark:text-cream/60">
                   {e.period}
                   {e.location && ` · ${e.location}`}
                 </p>
@@ -45,10 +45,10 @@ export async function Experience() {
                   {e.bullets.map((b) => (
                     <li
                       key={b}
-                      className="text-rosewood/80 text-[15px] leading-relaxed flex gap-3"
+                      className="text-rosewood/80 dark:text-cream/80 text-[15px] leading-relaxed flex gap-3"
                     >
                       <span
-                        className="mt-2 inline-block w-1 h-1 rounded-full bg-rosewood/40 flex-shrink-0"
+                        className="mt-2 inline-block w-1 h-1 rounded-full bg-rosewood/40 dark:bg-cream/40 flex-shrink-0"
                         aria-hidden
                       />
                       {b}

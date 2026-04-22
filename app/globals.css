@@ -9,6 +9,18 @@
   --muted: #7a5a3f;
 }
 
+.dark {
+  --bg: #140A04;
+  --fg: #F5EEE4;
+  --accent: #D99A3C;
+  --muted: rgba(245, 238, 228, 0.55);
+}
+
+.dark body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
 html {
   scroll-behavior: smooth;
 }

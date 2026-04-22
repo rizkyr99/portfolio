@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { ThemeToggle } from "./ThemeToggle";
 
 type Section = { id: string; label: string; fret: string };
 
@@ -36,38 +37,41 @@ export function Nav() {
   }, []);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-cream/75 border-b border-rosewood/10">
+    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-cream/75 dark:bg-[#140A04]/80 border-b border-rosewood/10 dark:border-cream/10">
       <div className="mx-auto max-w-6xl px-5 py-3 flex items-center justify-between">
         <Link
           href="#home"
-          className="font-display text-lg tracking-tight text-rosewood hover:text-sunburst-amber transition-colors"
+          className="font-display text-lg tracking-tight text-rosewood dark:text-cream hover:text-sunburst-amber dark:hover:text-sunburst-amber transition-colors"
         >
           <span className="sr-only">Home</span>
           <span aria-hidden>///</span>
         </Link>
 
-        <button
-          className="md:hidden text-rosewood font-mono text-xs uppercase tracking-widest"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-label="toggle navigation"
-        >
-          {open ? "close" : "menu"}
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle className="md:hidden" />
+          <button
+            className="md:hidden text-rosewood dark:text-cream font-mono text-xs uppercase tracking-widest"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-label="toggle navigation"
+          >
+            {open ? "close" : "menu"}
+          </button>
+        </div>
 
         <nav className="hidden md:flex items-center gap-5">
           {sections.map((s) => (
             <a
               key={s.id}
               href={`#${s.id}`}
-              className="group flex flex-col items-center text-xs font-mono text-rosewood/70 hover:text-rosewood transition-colors"
+              className="group flex flex-col items-center text-xs font-mono text-rosewood/70 dark:text-cream/70 hover:text-rosewood dark:hover:text-cream transition-colors"
             >
               <span
                 className={cn(
                   "w-6 h-6 rounded-full flex items-center justify-center border transition-all text-[10px]",
                   active === s.id
-                    ? "border-rosewood bg-rosewood text-cream shadow-chrome"
-                    : "border-rosewood/30"
+                    ? "border-rosewood dark:border-cream bg-rosewood dark:bg-cream text-cream dark:text-[#140A04] shadow-chrome"
+                    : "border-rosewood/30 dark:border-cream/30"
                 )}
                 aria-hidden
               >
@@ -78,20 +82,21 @@ export function Nav() {
               </span>
             </a>
           ))}
+          <ThemeToggle />
         </nav>
       </div>
 
       {open && (
-        <nav className="md:hidden border-t border-rosewood/10 bg-cream/95">
+        <nav className="md:hidden border-t border-rosewood/10 dark:border-cream/10 bg-cream/95 dark:bg-[#140A04]/95">
           <ul className="px-5 py-3 flex flex-col gap-2">
             {sections.map((s) => (
               <li key={s.id}>
                 <a
                   href={`#${s.id}`}
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 py-2 text-rosewood font-mono text-sm"
+                  className="flex items-center gap-3 py-2 text-rosewood dark:text-cream font-mono text-sm"
                 >
-                  <span className="w-7 h-7 rounded-full border border-rosewood/30 flex items-center justify-center text-[10px]">
+                  <span className="w-7 h-7 rounded-full border border-rosewood/30 dark:border-cream/30 flex items-center justify-center text-[10px]">
                     {s.fret}
                   </span>
                   <span className="uppercase tracking-widest text-xs">{s.label}</span>
