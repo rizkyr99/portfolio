@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, Mail } from 'lucide-react';
+import { ArrowDown, Mail, Download } from 'lucide-react';
 import { StringDivider } from './ui/StringDivider';
 
 type Profile = { name: string; title: string; tagline: string; location: string } | null
@@ -65,6 +65,12 @@ export function Hero({ profile }: { readonly profile: Profile }) {
             href='#contact'
             className='inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-cream/40 text-cream font-mono text-xs uppercase tracking-widest hover:bg-cream/10 transition-colors'>
             Get in touch <Mail className='w-3.5 h-3.5' />
+          </a>
+          <a
+            href='/resume.pdf'
+            download='resume.pdf'
+            className='inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-cream/40 text-cream font-mono text-xs uppercase tracking-widest hover:bg-cream/10 transition-colors'>
+            Resume <Download className='w-3.5 h-3.5' />
           </a>
         </motion.div>
       </div>
