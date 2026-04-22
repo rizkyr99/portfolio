@@ -9,10 +9,10 @@ import { Writing } from "@/components/Writing";
 import { Music } from "@/components/Music";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { fetchProfile, fetchProjects } from "@/lib/queries";
+import { fetchProfile, fetchProjects, fetchSkills } from "@/lib/queries";
 
 export default async function Home() {
-  const [profile, projects] = await Promise.all([fetchProfile(), fetchProjects()]);
+  const [profile, projects, skills] = await Promise.all([fetchProfile(), fetchProjects(), fetchSkills()]);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default async function Home() {
       <main>
         <Hero profile={profile} />
         <About />
-        <Skills />
+        <Skills skills={skills} />
         <Projects projects={projects ?? []} />
         <Experience />
         <Certifications />
