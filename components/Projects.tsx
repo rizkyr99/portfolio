@@ -3,9 +3,10 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, GitBranch } from "lucide-react";
+import { ExternalLink, GitBranch, X } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { PickupSwitch } from "./ui/PickupSwitch";
+import { cn } from "@/lib/cn";
 
 function slugify(title: string) {
   return title
@@ -40,11 +41,32 @@ const options: [
 
 export function Projects({ projects }: { readonly projects: Project[] }) {
   const [filter, setFilter] = useState<ProjectCategory>("fullstack");
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  const filtered = useMemo(
+  const byCategory = useMemo(
     () => projects.filter((p) => p.category === filter),
     [projects, filter]
   );
+
+  const availableTags = useMemo(() => {
+    const set = new Set<string>();
+    byCategory.forEach((p) => p.tags.forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, [byCategory]);
+
+  const filtered = useMemo(
+    () => activeTag ? byCategory.filter((p) => p.tags.includes(activeTag)) : byCategory,
+    [byCategory, activeTag]
+  );
+
+  function handleCategoryChange(v: string) {
+    setFilter(v as ProjectCategory);
+    setActiveTag(null);
+  }
+
+  function handleTagClick(tag: string) {
+    setActiveTag((prev) => (prev === tag ? null : tag));
+  }
 
   return (
     <section id="projects" className="relative py-24 px-6 bg-cream dark:bg-[#140A04]">
@@ -52,10 +74,10 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
         className="mx-auto max-w-6xl"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-15%' }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, margin: "-15%" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6">
           <SectionHeader
             eyebrow="Projects"
             title="Selected work."
@@ -65,13 +87,52 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
           <PickupSwitch
             options={options}
             value={filter}
-            onChange={(v) => setFilter(v as ProjectCategory)}
+            onChange={handleCategoryChange}
           />
         </div>
 
+        {/* tag filter row */}
+        <AnimatePresence>
+          {availableTags.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-wrap gap-2 mb-8 items-center"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-widest text-rosewood/40 dark:text-cream/40 mr-1">
+                Stack
+              </span>
+              {availableTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => handleTagClick(tag)}
+                  className={cn(
+                    "font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border transition-all duration-150",
+                    activeTag === tag
+                      ? "border-butterscotch bg-butterscotch/15 text-butterscotch"
+                      : "border-rosewood/15 dark:border-cream/15 text-rosewood/60 dark:text-cream/60 hover:border-rosewood/30 dark:hover:border-cream/30 hover:text-rosewood dark:hover:text-cream"
+                  )}
+                >
+                  {tag}
+                </button>
+              ))}
+              {activeTag && (
+                <button
+                  onClick={() => setActiveTag(null)}
+                  className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-rosewood/15 dark:border-cream/15 text-rosewood/50 dark:text-cream/50 hover:text-rosewood dark:hover:text-cream transition-colors"
+                >
+                  <X className="w-2.5 h-2.5" /> Clear
+                </button>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence mode="wait">
           <motion.div
-            key={filter}
+            key={`${filter}-${activeTag}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -98,11 +159,18 @@ export function Projects({ projects }: { readonly projects: Project[] }) {
 
                 <ul className="mt-5 flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
-                    <li
-                      key={t}
-                      className="font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-rosewood/5 dark:bg-cream/5 text-rosewood/70 dark:text-cream/70"
-                    >
-                      {t}
+                    <li key={t}>
+                      <button
+                        onClick={() => handleTagClick(t)}
+                        className={cn(
+                          "font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-full transition-all duration-150",
+                          activeTag === t
+                            ? "bg-butterscotch/20 text-butterscotch border border-butterscotch/40"
+                            : "bg-rosewood/5 dark:bg-cream/5 text-rosewood/70 dark:text-cream/70 border border-transparent hover:border-rosewood/20 dark:hover:border-cream/20"
+                        )}
+                      >
+                        {t}
+                      </button>
                     </li>
                   ))}
                 </ul>
